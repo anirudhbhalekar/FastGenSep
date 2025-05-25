@@ -1,0 +1,235 @@
+config:
+  seed: 64736289
+  name: default
+  train: true
+  test: false
+  path:
+    exp_root: exp
+    datasets:
+      wsj0_mix: null
+      valentini: null
+      libri_mix: /home/ab2810/rds/hpc-work/LibriMix
+    figures: figures
+  datamodule:
+    train:
+      dl_opts:
+        num_workers: 8
+        shuffle: true
+        batch_size: 2
+      dataset:
+        _target_: data.LibriMix
+        path: null
+        n_spkr: 2
+        fs: 8000
+        cut: max
+        split: train
+        max_len_s: 5
+        max_n_samples: null
+    val:
+      dl_opts:
+        num_workers: 8
+        shuffle: false
+        batch_size: 2
+      dataset:
+        _target_: data.LibriMix
+        path: null
+        n_spkr: 2
+        fs: 8000
+        cut: max
+        split: val
+        max_len_s: null
+        max_n_samples: null
+    test:
+      dl_opts:
+        num_workers: 8
+        shuffle: false
+        batch_size: 1
+      dataset:
+        _target_: data.LibriMix
+        path: null
+        n_spkr: 2
+        fs: 8000
+        cut: max
+        split: test
+        max_len_s: null
+        max_n_samples: null
+    libri-clean:
+      dl_opts:
+        num_workers: 8
+        shuffle: false
+        batch_size: 1
+      dataset:
+        _target_: data.LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
+        n_spkr: 2
+        fs: 8000
+        cut: max
+        split: librimix_test
+        max_len_s: null
+        max_n_samples: null
+        mix_dir: mix_clean
+    libri-noisy:
+      dl_opts:
+        num_workers: 8
+        shuffle: false
+        batch_size: 1
+      dataset:
+        _target_: data.LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
+        n_spkr: 2
+        fs: 8000
+        cut: max
+        split: librimix_test
+        max_len_s: null
+        max_n_samples: null
+        mix_dir: mix_both
+    librimix_test:
+      dl_opts:
+        num_workers: 8
+        shuffle: false
+        batch_size: 1
+      dataset:
+        _target_: data.LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
+        n_spkr: 2
+        fs: 8000
+        cut: max
+        split: librimix_test
+        max_len_s: null
+        max_n_samples: null
+        mix_dir: mix_clean
+    librimix_train-100:
+      dl_opts:
+        num_workers: 8
+        shuffle: false
+        batch_size: 1
+      dataset:
+        _target_: data.LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
+        n_spkr: 2
+        fs: 8000
+        cut: max
+        split: librimix_train-100
+        max_len_s: null
+        max_n_samples: null
+        mix_dir: mix_clean
+    librimix_train-360:
+      dl_opts:
+        num_workers: 8
+        shuffle: false
+        batch_size: 1
+      dataset:
+        _target_: data.LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
+        n_spkr: 2
+        fs: 8000
+        cut: max
+        split: librimix_train-360
+        max_len_s: null
+        max_n_samples: null
+        mix_dir: mix_clean
+    librimix_dev:
+      dl_opts:
+        num_workers: 8
+        shuffle: false
+        batch_size: 1
+      dataset:
+        _target_: data.LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
+        n_spkr: 2
+        fs: 8000
+        cut: max
+        split: librimix_dev
+        max_len_s: null
+        max_n_samples: null
+        mix_dir: mix_clean
+    shortcut_target_args:
+      bootstrap_every: 8
+      denoise_timesteps: 32
+      bootstrap_dt_bias: 0
+      sigma_min: 0.001
+      p_0: 0.15
+  model:
+    n_speakers: 2
+    fs: 8000
+    s1_embed_dim: 192
+    t_eps: 0.03
+    t_rev_init: 0.03
+    ema_decay: 0.999
+    valid_max_sep_batches: 100
+    time_sampling_strategy: uniform
+    train_source_order: power
+    init_hack: 5
+    mmnr_thresh_pit: -10.0
+    main_model:
+      _target_: models.score_models.ScoreModelNCSNpp
+      num_sources: 2
+      stft_args:
+        n_fft: 510
+        hop_length: 128
+        center: true
+        pad_mode: constant
+      backbone_args:
+        _target_: models.ncsnpp.NCSNpp
+        s1_embed_dim: 192
+        nf: 32
+      transform: exponent
+      spec_abs_exponent: 0.5
+      spec_factor: 0.33
+      spec_trans_learnable: false
+      s1_model_args:
+        _target_: models.s1_model.VitEncoder
+        embed_dim: 192
+        patch_size: 16
+        depth: 8
+        num_heads: 6
+        mlp_ratio: 4
+        num_speakers: 2
+        in_chans: 1
+        img_size:
+        - 1024
+        - 256
+        alpha: 0
+        use_custom_patch: false
+        temp: 0.07
+      fs: 8000
+    sde:
+      _target_: sdes.sdes.MixSDE
+      ndim: 2
+      d_lambda: 2.0
+      sigma_min: 0.05
+      sigma_max: 0.5
+      'N': 30
+    sampler:
+      'N': 30
+      snr: 0.5
+      corrector_steps: 1
+    loss:
+      _target_: torch.nn.MSELoss
+    main_val_loss: val/si_sdr
+    main_val_loss_mode: max
+    val_losses:
+      val/si_sdr:
+        _target_: models.losses.SISDRLoss
+        zero_mean: true
+        clamp_db: 30
+        reduction: mean
+        sign_flip: true
+    optimizer:
+      _target_: torch.optim.Adam
+      lr: 0.0001
+      weight_decay: 0.0
+    scheduler: null
+    grad_clipper:
+      _target_: utils.FixedClipper
+      max_norm: 5.0
+  trainer:
+    _target_: pytorch_lightning.Trainer
+    accumulate_grad_batches: 16
+    min_epochs: 1
+    max_epochs: 100
+    deterministic: true
+    accelerator: gpu
+    devices: 1
+    check_val_every_n_epoch: 1
+    profiler: false

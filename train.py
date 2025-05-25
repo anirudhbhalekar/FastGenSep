@@ -1,10 +1,8 @@
 from typing import Any
-import jax.numpy as jnp
 from absl import app, flags
 from functools import partial
 import numpy as np
 import tqdm
-import optax
 import wandb
 
 
@@ -32,7 +30,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 torch.autograd.set_detect_anomaly(True)
-WANB_LOG = True 
+WANB_LOG = False 
 
 def load_model(config): 
     if "main_model" in config.model: 
@@ -92,7 +90,7 @@ def load_model(config):
 
     return model, (load_pretrained is not None)
 
-@hydra.main(config_path="/research/milsrg1/user_workspace/ab2810/IIB_Proj/SM_GenSep++/config", config_name="config")
+@hydra.main(config_path="/home/ab2810/rds/hpc-work/FastGenSep/config", config_name="config")
 def main(cfg):
     try:
         nvmlInit()
@@ -103,7 +101,7 @@ def main(cfg):
         # Handle the error or exit the script
         exit(1)
         
-    os.environ['LD_LIBRARY_PATH'] = f"{os.environ['CONDA_PREFIX']}/lib:{os.environ.get('LD_LIBRARY_PATH', '')}"
+    #os.environ["LD_LIBRARY_PATH"] = f"{os.environ['CONDA_PREFIX']}/lib"
     if utils.ddp.is_rank_zero():
         exp_name = HydraConfig().get().run.dir
         log.info(f"Start experiment: {exp_name}")
@@ -143,9 +141,9 @@ def main(cfg):
 
     # create a logger
     if WANB_LOG:
-        wandb.init(project="shortcut-model-separation", sync_tensorboard=True, name="FastGenSep++ (L)")
-    tb_logger = pl_loggers.TensorBoardLogger(save_dir="/research/milsrg1/user_workspace/ab2810/IIB_Proj/SM_GenSep++/sessions", name="FGS (L)", version="1")
-    
+        wandb.init(project="shortcut-model-separation", sync_tensorboard=True, name="FastGenSep++ (HPC)")
+    tb_logger = pl_loggers.TensorBoardLogger(save_dir="/home/ab2810/rds/hpc-work/FastGenSep/sessions", name="FGS (HPC)", version="1")
+
     # most basic trainer, uses good defaults (auto-tensorboard, checkpoints,
     # logs, and more)
     trainer = instantiate(cfg.trainer, callbacks=callbacks, logger=tb_logger)

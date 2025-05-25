@@ -45,10 +45,10 @@ libri-clean:
     dl_opts:
         num_workers: 8
         shuffle: false
-        batch_size: 1
+        batch_size: 2
     dataset:
         _target_: data.LibriMix
-        path:  /data/milsrg1/corpora/LibriMix
+        path:  /home/ab2810/rds/hpc-work/LibriMix
         n_spkr: ${model.n_speakers}
         fs: ${model.fs}
         cut: max
@@ -61,10 +61,10 @@ libri-noisy:
     dl_opts:
         num_workers: 8
         shuffle: false
-        batch_size: 1
+        batch_size: 2
     dataset:
         _target_: data.LibriMix
-        path:  /data/milsrg1/corpora/LibriMix
+        path:  /home/ab2810/rds/hpc-work/LibriMix
         n_spkr: ${model.n_speakers}
         fs: ${model.fs}
         cut: max
@@ -77,10 +77,10 @@ librimix_test:
     dl_opts:
         num_workers: 8
         shuffle: false
-        batch_size: 1
+        batch_size: 2
     dataset:
         _target_: data.LibriMix
-        path: /data/milsrg1/corpora/LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
         n_spkr: ${model.n_speakers}
         fs: ${model.fs}
         cut: max
@@ -93,10 +93,10 @@ librimix_train-100:
     dl_opts:
         num_workers: 8
         shuffle: false
-        batch_size: 1
+        batch_size: 2
     dataset:
         _target_: data.LibriMix
-        path: /data/milsrg1/corpora/LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
         n_spkr: ${model.n_speakers}
         fs: ${model.fs}
         cut: max
@@ -109,10 +109,10 @@ librimix_train-360:
     dl_opts:
         num_workers: 8
         shuffle: false
-        batch_size: 1
+        batch_size: 2
     dataset:
         _target_: data.LibriMix
-        path: /data/milsrg1/corpora/LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
         n_spkr: ${model.n_speakers}
         fs: ${model.fs}
         cut: max
@@ -125,10 +125,10 @@ librimix_dev:
     dl_opts:
         num_workers: 8
         shuffle: false
-        batch_size: 1
+        batch_size: 2
     dataset:
         _target_: data.LibriMix
-        path: /data/milsrg1/corpora/LibriMix
+        path: /home/ab2810/rds/hpc-work/LibriMix
         n_spkr: ${model.n_speakers}
         fs: ${model.fs}
         cut: max

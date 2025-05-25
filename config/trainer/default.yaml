@@ -1,7 +1,7 @@
 _target_: pytorch_lightning.Trainer
-accumulate_grad_batches: 16
+accumulate_grad_batches: 8
 min_epochs: 1
-max_epochs: 250
+max_epochs: 100
 deterministic: true
 accelerator: gpu
 devices: 1

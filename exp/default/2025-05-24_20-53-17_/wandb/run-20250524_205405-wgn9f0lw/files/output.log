@@ -1,0 +1,30 @@
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+[2025-05-24 20:54:06,607][__main__][INFO] - start training
+NO CHECKPOINT TO RESUME FROM
+You are using a CUDA device ('NVIDIA A100-SXM4-80GB') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+[34m[1mwandb[0m: [33mWARNING[0m Found log directory outside of given root_logdir, dropping given root_logdir for event file in /home/ab2810/rds/hpc-work/FastGenSep/sessions/FGS (HPC)/1
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2025-05-24 20:54:07,104][model][INFO] - set optim with {'_target_': 'torch.optim.Adam', 'lr': 0.0001, 'weight_decay': 0.0}
+┏━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┓
+┃[1;35m [0m[1;35m [0m[1;35m [0m┃[1;35m [0m[1;35mName       [0m[1;35m [0m┃[1;35m [0m[1;35mType            [0m[1;35m [0m┃[1;35m [0m[1;35mParams[0m[1;35m [0m┃[1;35m [0m[1;35mMode [0m[1;35m [0m┃
+┡━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━┩
+│[2m [0m[2m0[0m[2m [0m│ model       │ ScoreModelNCSNpp │  4.2 M │ train │
+│[2m [0m[2m1[0m[2m [0m│ loss        │ MSELoss          │      0 │ train │
+│[2m [0m[2m2[0m[2m [0m│ si_sdr_loss │ SISDRLoss        │      0 │ train │
+└───┴─────────────┴──────────────────┴────────┴───────┘
+[1mTrainable params[0m: 4.2 M
+[1mNon-trainable params[0m: 32
+[1mTotal params[0m: 4.2 M
+[1mTotal estimated model params size (MB)[0m: 16
+[1mModules in train mode[0m: 444
+[1mModules in eval mode[0m: 0
+SLURM auto-requeueing enabled. Setting signal handlers.
+[2KEpoch 0/99 [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m 160/50800 [2m0:00:27 • 2:15:50[0m [2;4m6.21it/s[0m [3mv_num: 1[0m[2025-05-24 20:54:53,230][model][INFO] - Training step 160 loss 1.249039649963379
+[2KEpoch 0/99 [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m 320/50800 [2m0:00:53 • 2:15:34[0m [2;4m6.21it/s[0m [3mv_num: 1[0m[2025-05-24 20:55:19,082][model][INFO] - Training step 320 loss 1.390761375427246
+[2KEpoch 0/99 [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m 480/50800 [2m0:01:19 • 2:18:28[0m [2;4m6.06it/s[0m [3mv_num: 1[0m[2025-05-24 20:55:45,190][model][INFO] - Training step 480 loss 1.4125272035598755
+[2KEpoch 0/99 [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m 571/50800 [2m0:01:34 • 2:15:29[0m [2;4m6.18it/s[0m [3mv_num: 1[0m
+
+Detected KeyboardInterrupt, attempting graceful shutdown ...
+[?25h

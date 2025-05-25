@@ -499,7 +499,12 @@ class NCSNpp(nn.Module):
 
         assert m_idx == len(modules), "Implementation error"
         if self.scale_by_sigma:
-            used_sigmas = used_sigmas.reshape((x.shape[0], *([1] * len(x.shape[1:]))))
+            # Scale the output by the used sigmas
+            # We want used_sigmas to be from shape (batch,) to (batch, 1, 1, 1) 
+            used_sigmas = used_sigmas.unsqueeze(1).unsqueeze(1).unsqueeze(1)  # Add dimensions for broadcasting
+            #raise ValueError(f"used_sigmas shape: {used_sigmas.shape}, x shape: {x.shape}")
+            #used_sigmas = used_sigmas.reshape((x.shape[0], *([1] * (len(x.shape) - 1))))
+            #used_sigmas = used_sigmas.reshape((x.shape[0], *([1] * len(x.shape[1:]))))
             h = h / used_sigmas
 
         # Convert back to complex number

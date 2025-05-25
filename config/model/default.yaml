@@ -7,7 +7,7 @@ s1_embed_dim: 192
 t_eps: 0.03
 t_rev_init: 0.03
 ema_decay: 0.999
-valid_max_sep_batches: 10
+valid_max_sep_batches: 100
 time_sampling_strategy: uniform
 train_source_order: power
 init_hack: 5

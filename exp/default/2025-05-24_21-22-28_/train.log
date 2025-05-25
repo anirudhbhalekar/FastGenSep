@@ -1,0 +1,9 @@
+[2025-05-24 21:22:28,853][__main__][INFO] - Start experiment: exp/default/2025-05-24_21-22-28_
+[2025-05-24 21:22:28,862][__main__][INFO] - create datalogger
+[2025-05-24 21:22:28,862][__main__][INFO] - Create new model
+[2025-05-24 21:22:29,549][models.ncsnpp][DEBUG] - NCSNpp.__init__
+[2025-05-24 21:22:29,550][models.ncsnpp][DEBUG] - all_resolutions: [256, 128, 64, 32, 16, 8, 4]
+[2025-05-24 21:22:29,551][models.ncsnpp][DEBUG] - num_channels: 6
+[2025-05-24 21:22:30,571][__main__][INFO] - start training
+[2025-05-24 21:22:31,038][model][INFO] - set optim with {'_target_': 'torch.optim.Adam', 'lr': 0.0001, 'weight_decay': 0.0}
+[2025-05-24 21:22:32,284][models.ncsnpp][INFO] - torch.Size([2])

@@ -1,0 +1,11 @@
+[2025-05-24 20:53:18,191][__main__][INFO] - Start experiment: exp/default/2025-05-24_20-53-17_
+[2025-05-24 20:53:18,244][__main__][INFO] - create datalogger
+[2025-05-24 20:53:18,244][__main__][INFO] - Create new model
+[2025-05-24 20:53:20,172][models.ncsnpp][DEBUG] - NCSNpp.__init__
+[2025-05-24 20:53:20,172][models.ncsnpp][DEBUG] - all_resolutions: [256, 128, 64, 32, 16, 8, 4]
+[2025-05-24 20:53:20,197][models.ncsnpp][DEBUG] - num_channels: 6
+[2025-05-24 20:54:06,607][__main__][INFO] - start training
+[2025-05-24 20:54:07,104][model][INFO] - set optim with {'_target_': 'torch.optim.Adam', 'lr': 0.0001, 'weight_decay': 0.0}
+[2025-05-24 20:54:53,230][model][INFO] - Training step 160 loss 1.249039649963379
+[2025-05-24 20:55:19,082][model][INFO] - Training step 320 loss 1.390761375427246
+[2025-05-24 20:55:45,190][model][INFO] - Training step 480 loss 1.4125272035598755

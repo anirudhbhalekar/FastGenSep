@@ -9,14 +9,14 @@ seed: 64736289
 name: default  # experiment name
 train: true
 test: false
-resume_from_checkpoint: "/research/milsrg1/user_workspace/ab2810/IIB_Proj/SM_GenSep++/sessions/FGS (L)/1/checkpoints/epoch-025_si_sdr-3.738.ckpt"
+#resume_from_checkpoint: "/research/milsrg1/user_workspace/ab2810/IIB_Proj/SM_GenSep++/sessions/FGS (L)/1/checkpoints/epoch-025_si_sdr-3.738.ckpt"
 
 path:
     exp_root: exp
     datasets:
-        wsj0_mix: /data/milsrg1/corpora/WSJ0-mix
-        valentini: data/VCTK_DEMAND
-        libri_mix: /data/milsrg1/corpora/LibriMix
+        wsj0_mix: 
+        valentini: 
+        libri_mix: /home/ab2810/rds/hpc-work/LibriMix
     figures: figures
     
 hydra:

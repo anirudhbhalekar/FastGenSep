@@ -1,4 +1,4 @@
-# 2023 (c) LINE Corporation
+#2023 (c) LINE Corporation
 # Authors: Robin Scheibler
 # MIT License
 import datetime
