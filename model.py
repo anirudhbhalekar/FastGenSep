@@ -432,7 +432,9 @@ class FastGenSep(pl.LightningModule):
             # 2) =========== Sample t. ============
 
             dt_sections = torch.pow(2, dt_base).to(device) # [1, 2, 4, 8, 16, 32]
-            t = torch.randint(low = 0, high = int(dt_sections), size=(bootstrap_batchsize,)).to(device)
+            # Generate random floats in [0,1), scale by dt_sections, then floor
+            t = (torch.rand_like(dt_sections, dtype=torch.float32) * dt_sections).floor().to(torch.int64)
+
             if t_init: 
                 t = torch.zeros_like(t).to(device)
             t = t / dt_sections # Between 0 and 1.

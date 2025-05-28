@@ -109,7 +109,7 @@ librimix_train-360:
     dl_opts:
         num_workers: 8
         shuffle: false
-        batch_size: 2
+        batch_size: 4
     dataset:
         _target_: data.LibriMix
         path: /home/ab2810/rds/hpc-work/LibriMix
@@ -125,7 +125,7 @@ librimix_dev:
     dl_opts:
         num_workers: 8
         shuffle: false
-        batch_size: 2
+        batch_size: 4
     dataset:
         _target_: data.LibriMix
         path: /home/ab2810/rds/hpc-work/LibriMix

@@ -30,7 +30,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 torch.autograd.set_detect_anomaly(True)
-WANB_LOG = False 
+WANB_LOG = True 
 
 def load_model(config): 
     if "main_model" in config.model: 
@@ -142,7 +142,7 @@ def main(cfg):
     # create a logger
     if WANB_LOG:
         wandb.init(project="shortcut-model-separation", sync_tensorboard=True, name="FastGenSep++ (HPC)")
-    tb_logger = pl_loggers.TensorBoardLogger(save_dir="/home/ab2810/rds/hpc-work/FastGenSep/sessions", name="FGS (HPC)", version="1")
+    tb_logger = pl_loggers.TensorBoardLogger(save_dir="/home/ab2810/rds/hpc-work/FastGenSep/sessions", name="FGS_(HPC)", version="2")
 
     # most basic trainer, uses good defaults (auto-tensorboard, checkpoints,
     # logs, and more)

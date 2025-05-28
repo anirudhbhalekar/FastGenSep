@@ -20,17 +20,17 @@ export CXX=$CONDA_PREFIX/bin/g++
 
 export TORCH_CUDA_ARCH_LIST="8.0"
 
-which gcc 
-which g++
-which nvcc 
-
 echo -------------------------------------------------
 echo Python version used:
 python -V
 echo ----------------------------------------------------------------
-echo Starting training...
-python train.py
-#python -c "from models.ncsnpp_utils.op import fused_act" # Debugging line to check if the custom op is compiled correctly
-echo ...training finished
+echo Starting evaluation...
 
-echo ----------------------------------------------------------------
+python separate.py \
+    --model /home/ab2810/rds/hpc-work/FastGenSep/seed_checkpoint/epoch-030_si_sdr-6.211.ckpt \
+    --input_dir /home/ab2810/rds/hpc-work/LibriMix/Libri2Mix/wav8k/max/test/mix_clean/\
+    --output_dir /home/ab2810/rds/hpc-work/FastGenSep/results/ \
+    --num_steps 32 \
+    --max_count 500 \
+    
+
