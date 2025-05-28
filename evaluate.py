@@ -261,7 +261,7 @@ if __name__ == "__main__":
         print("Loading")
         # set OS environment variable HYDRA_FULL_ERROR=1 to get full error message
         os.environ["HYDRA_FULL_ERROR"] = "1"
-        with open("/home/ab2810/rds/hpc-work/FastGenSep/sessions/FGS_(HPC)/1/hparams.yaml") as f:
+        with open("/home/ab2810/rds/hpc-work/FastGenSep/sessions/FGS_(HPC)/2/hparams.yaml") as f:
             hparams = yaml.safe_load(f)
         config = hparams["config"]
         print("Loaded config file")

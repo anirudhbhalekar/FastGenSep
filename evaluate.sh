@@ -26,5 +26,8 @@ python -V
 echo ----------------------------------------------------------------
 echo Starting evaluations... 
 
-python evaluate.py /home/ab2810/rds/hpc-work/FastGenSep/seed_checkpoint/epoch-030_si_sdr-6.211.ckpt -N 32 
-
+python evaluate.py /home/ab2810/rds/hpc-work/FastGenSep/seed_checkpoint/epoch-030_si_sdr-6.211.ckpt -N 16 -l 500
+echo ----------------------------------------------------------------
+python evaluate.py /home/ab2810/rds/hpc-work/FastGenSep/seed_checkpoint/epoch-030_si_sdr-6.211.ckpt -N 8 -l 500
+echo ----------------------------------------------------------------
+echo Evaluations completed.
